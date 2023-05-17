@@ -22,7 +22,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<release>17</release>
+					<release>15</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -66,5 +66,23 @@
 			<version>5.9.2</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-params</artifactId>
+    <version>5.9.2</version>
+    <scope>test</scope>
+</dependency>
+		
+
+		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
+<dependency>
+    <groupId>org.junit.platform</groupId>
+    <artifactId>junit-platform-launcher</artifactId>
+    <version>1.9.2</version>
+    <scope>test</scope>
+</dependency>
+
 	</dependencies>
 </project>

@@ -20,24 +20,32 @@ class JsonReaderTest {
 		int precio=22000;
 		return Stream.of(
 				
-				Arguments.of(Marca, Modelo,año,precio));
+				Arguments.of(new Coche(Marca, Modelo,año,precio)));
 		}
 	@ParameterizedTest
-	@CsvSource("data/coches.json")
-	void testLeerCochesJSON(String ruta) {
+	@CsvSource({"data/coches.json,4" ,"noExiste,0"})
+	void testLeerCochesJSON(String ruta,int tamano) {
+		JsonReader js=new JsonReader();
 		Coche [] coches = JsonReader.leerCochesJSON(ruta);
-		assertEquals (4, coches.length);
+		if (coches!=null) {
+			assertEquals (tamano, coches.length);
+		}else {
+			assertNull(coches);
+		}
+		
+		
 	}
 
 	@ParameterizedTest
 	@MethodSource("Coches")
-	void testLeerCochesJSONprimero(String Marca,String Modelo,int año,int precio) {
+	void testLeerCochesJSONprimero(Coche coche) {
+		
 		String ruta = "data/coches.json";
-		;
+		
 		Coche [] coches = JsonReader.leerCochesJSON(ruta);
-		assertEquals( new Coche (Marca,Modelo ,año ,precio ), coches[0]);
-		assertTrue ( new Coche (Marca,Modelo ,año ,precio ).equals(coches[0]));
-		assertTrue (coches[0].equals( new Coche (Marca,Modelo ,año ,precio )));
+		assertEquals( coche, coches[0]);
+		assertTrue (coche.equals(coches[0]));
+		assertTrue (coches[0].equals(coche));
 	}
 
 

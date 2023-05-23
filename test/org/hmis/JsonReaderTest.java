@@ -14,13 +14,20 @@ import org.junit.jupiter.api.Test;
 
 class JsonReaderTest {
 	static Stream<Arguments> Coches(){
-		String Marca="Toyota";
-		String Modelo="Corolla";
-		int año=2022;
-		int precio=22000;
+		String Marca1="Toyota";
+		String Modelo1="Corolla";
+		int año1=2022;
+		int precio1=22000;
+		boolean result1= true;
+		String Marca2="Jeep";
+		String Modelo2="Wrangler";
+		int año2=2021;
+		int precio2=70000;
+		boolean result2= false;
 		return Stream.of(
-				
-				Arguments.of(new Coche(Marca, Modelo,año,precio)));
+				Arguments.of(new Coche(Marca1, Modelo1,año1,precio1),result1),
+				Arguments.of(new Coche(Marca2, Modelo2,año2,precio2),result2)
+				);
 		}
 	@ParameterizedTest
 	@CsvSource({"data/coches.json,4" ,"noExiste,0"})
@@ -38,14 +45,13 @@ class JsonReaderTest {
 
 	@ParameterizedTest
 	@MethodSource("Coches")
-	void testLeerCochesJSONprimero(Coche coche) {
+	void testLeerCochesJSONprimero(Coche coche,boolean expected) {
 		
 		String ruta = "data/coches.json";
 		
 		Coche [] coches = JsonReader.leerCochesJSON(ruta);
-		assertEquals( coche, coches[0]);
-		assertTrue (coche.equals(coches[0]));
-		assertTrue (coches[0].equals(coche));
+		assertEquals(expected,coche.equals(coches[0]));
+		assertEquals(expected,coches[0].equals(coche));
 	}
 
 
